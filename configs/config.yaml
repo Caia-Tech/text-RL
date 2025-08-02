@@ -1,0 +1,103 @@
+# TextLib RL System Configuration
+
+# Training Parameters
+training:
+  max_episodes: 10000
+  max_steps_per_episode: 15
+  learning_rate: 0.1
+  discount_factor: 0.95
+  exploration_rate: 1.0
+  min_exploration: 0.01
+  decay_rate: 0.995
+
+# Logging Configuration
+logging:
+  level: "info"
+  batch_size: 100
+  flush_interval: "5s"
+  log_path: "./logs"
+
+# Telemetry Configuration
+telemetry:
+  enabled: true
+  endpoint: "http://metrics-collector:9090"
+  buffer_size: 1000
+  flush_interval: "10s"
+
+# Checkpoint Configuration
+checkpoints:
+  enabled: true
+  interval: 500
+  directory: "./models"
+  keep_last: 5
+
+# Performance Configuration
+performance:
+  enable_profiling: false
+  metrics_port: 8080
+  max_memory: "512Mi"
+  max_cpu: "2"
+
+# Task Weights for Reward Calculation
+task_weights:
+  entity_extraction: 1.0
+  readability_analysis: 0.8
+  code_analysis: 0.9
+  comprehensive: 1.2
+
+# Function Configuration
+functions:
+  extract_entities:
+    cost: 5
+    base_success_rate: 0.85
+    timeout: "30s"
+  
+  analyze_readability:
+    cost: 3
+    base_success_rate: 0.90
+    timeout: "15s"
+  
+  detect_code:
+    cost: 2
+    base_success_rate: 0.95
+    timeout: "10s"
+  
+  extract_keywords:
+    cost: 4
+    base_success_rate: 0.88
+    timeout: "20s"
+  
+  sentiment_analysis:
+    cost: 3
+    base_success_rate: 0.82
+    timeout: "15s"
+  
+  summarize_text:
+    cost: 8
+    base_success_rate: 0.75
+    timeout: "60s"
+  
+  format_text:
+    cost: 2
+    base_success_rate: 0.98
+    timeout: "10s"
+  
+  validate_output:
+    cost: 1
+    base_success_rate: 0.99
+    timeout: "5s"
+
+# Analysis Configuration
+analysis:
+  window_size: 100
+  min_pattern_frequency: 3
+  quality_threshold: 0.7
+  success_rate_threshold: 0.8
+
+# Security Configuration
+security:
+  container_memory_limit: "512m"
+  container_cpu_limit: "2"
+  read_only_filesystem: true
+  drop_capabilities: true
+  no_new_privileges: true

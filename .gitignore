@@ -1,0 +1,78 @@
+# Binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+rl-textlib-learner
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool
+*.out
+
+# Go workspace file
+go.work
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Runtime generated directories and files
+logs/
+data/
+models/
+*.log
+
+# Generated reports and insights
+insights.json
+final_model*.json
+api-usage-guide.md
+enhanced-api-usage-guide.md
+test_output.log
+
+# Docker volumes
+prometheus-data/
+
+# Temporary files
+*.tmp
+*.temp
+health_check_temp.txt
+
+# Configuration overrides
+configs/local.yaml
+configs/override.yaml
+
+# Certificates and keys
+*.pem
+*.key
+*.crt
+
+# Build artifacts
+dist/
+build/
+
+# Backup files
+*.bak
+*.backup
+
+# Local environment files
+.env
+.env.local
+
+# Benchmark results
+benchmarks/*_results.txt
+benchmarks/benchmark_data.csv
