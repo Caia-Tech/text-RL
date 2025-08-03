@@ -19,7 +19,7 @@ import (
 func main() {
 	// Parse command line flags
 	var (
-		mode          = flag.String("mode", "train", "Mode: train, generate-report, or health-check")
+		mode          = flag.String("mode", "train", "Mode: train, generate-report, health-check, or cleanup-logs")
 		maxEpisodes   = flag.Int("episodes", 10000, "Maximum training episodes")
 		logLevel      = flag.String("log-level", "info", "Logging level")
 		checkpointDir = flag.String("checkpoint-dir", "./models", "Checkpoint directory")
@@ -49,6 +49,8 @@ func main() {
 		generateReport(*inputFile, *outputFile, *modelFile)
 	case "health-check":
 		healthCheck()
+	case "cleanup-logs":
+		cleanupLogs()
 	default:
 		log.Fatalf("Unknown mode: %s", *mode)
 	}
@@ -56,6 +58,12 @@ func main() {
 
 func runTraining(maxEpisodes int, checkpointDir string, enableProfiling bool, configFile string) {
 	log.Println("Starting RL training with comprehensive logging...")
+
+	// Perform automatic log cleanup before training
+	log.Println("Checking log directory size...")
+	if err := logging.AutoCleanup("./logs", 50.0, 200); err != nil {
+		log.Printf("Warning: log cleanup failed: %v", err)
+	}
 
 	// Initialize logging system
 	logger := logging.NewInsightLogger("./logs", 100, 5*time.Second)
@@ -139,6 +147,18 @@ func generateReport(inputFile, outputFile, modelFile string) {
 	}
 
 	log.Printf("API usage guide generated successfully: %s", outputFile)
+}
+
+func cleanupLogs() {
+	fmt.Println("🧹 Starting log cleanup...")
+	
+	// Perform automatic cleanup with sensible defaults
+	err := logging.AutoCleanup("./logs", 10.0, 100) // 10MB max, 100 files max
+	if err != nil {
+		log.Fatalf("Log cleanup failed: %v", err)
+	}
+	
+	fmt.Println("✅ Log cleanup completed successfully")
 }
 
 func healthCheck() {
