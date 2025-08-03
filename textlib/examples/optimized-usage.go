@@ -2,8 +2,7 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"github.com/yourusername/textlib"
+	"textlib-rl-system/textlib"
 )
 
 // This example demonstrates how to use the optimized TextLib functions
@@ -23,166 +22,76 @@ feedback by EOD Friday. We need to finalize during Monday's standup. Best regard
 10x faster uploads, end-to-end encryption, and dark mode! Thank you beta testers! 
 #ProductLaunch #TechNews`
 
-	// Example 1: General Purpose Analysis
-	fmt.Println("=== General Purpose Analysis ===")
-	generalResult, err := textlib.OptimizedGeneralAnalysis(technicalDoc)
-	if err != nil {
-		log.Printf("General analysis error: %v", err)
-	} else {
-		fmt.Printf("Entities found: %d\n", len(generalResult.Entities.Entities))
-		fmt.Printf("Readability score: %.2f\n", generalResult.Readability.Score)
-		fmt.Printf("Top keywords: %v\n", generalResult.Keywords.Top(3))
-		fmt.Printf("Optimization used: %s\n", generalResult.OptimizationUsed)
+	// Example 1: Smart Analysis (RL-optimized comprehensive analysis)
+	fmt.Println("=== Smart Analysis ===")
+	smartResult := textlib.SmartAnalyze(technicalDoc)
+	fmt.Printf("Entities found: %d\n", len(smartResult.Entities))
+	fmt.Printf("Sentences: %d\n", len(smartResult.Sentences))
+	fmt.Printf("Quality score: %.2f\n", smartResult.QualityScore)
+	fmt.Printf("Processing path: %v\n", smartResult.OptimizedPath)
+	fmt.Printf("Strategy: %s\n", smartResult.Strategy.Name)
+
+	// Example 2: Deep Technical Analysis
+	fmt.Println("\n=== Deep Technical Analysis ===")
+	techResult := textlib.DeepTechnicalAnalysis(technicalDoc)
+	if codeMetrics, ok := techResult.CodeMetrics["code_blocks"].([]string); ok {
+		fmt.Printf("Code snippets found: %d\n", len(codeMetrics))
+	}
+	fmt.Printf("Lexical complexity: %.2f\n", techResult.Complexity.LexicalComplexity)
+	fmt.Printf("Overall quality: %.2f\n", techResult.Quality.OverallScore)
+	fmt.Printf("Strategy: %s\n", techResult.Strategy.Name)
+
+	// Example 3: Domain-Optimized Analysis
+	fmt.Println("\n=== Domain-Optimized Analysis ===")
+	businessResult := textlib.DomainOptimizedAnalyze(businessEmail, "general")
+	fmt.Printf("Domain: %s\n", businessResult.Domain)
+	fmt.Printf("Analysis completed\n")
+	if domainSpecific := businessResult.DomainSpecific; domainSpecific != nil {
+		fmt.Printf("Domain-specific insights available\n")
 	}
 
-	// Example 2: Technical Documentation Analysis
-	fmt.Println("\n=== Technical Documentation Analysis ===")
-	techResult, err := textlib.OptimizedTechnicalAnalysis(technicalDoc)
-	if err != nil {
-		log.Printf("Technical analysis error: %v", err)
-	} else {
-		fmt.Printf("Has code: %v\n", techResult.HasCode)
-		fmt.Printf("Technical terms: %v\n", techResult.TechnicalTerms[:min(5, len(techResult.TechnicalTerms))])
-		fmt.Printf("Keywords: %v\n", techResult.Keywords[:min(5, len(techResult.Keywords))])
-	}
+	// Example 4: Quick Insights for Social Media
+	fmt.Println("\n=== Quick Insights for Social Media ===")
+	socialResult := textlib.QuickInsights(socialPost)
+	fmt.Printf("Insights: %v\n", socialResult.Insights)
+	fmt.Printf("Sentiment score: %.2f\n", socialResult.SentimentScore)
+	fmt.Printf("Key terms: %v\n", socialResult.KeyTerms)
+	fmt.Printf("Readability: %.2f\n", socialResult.Readability)
 
-	// Example 3: Business Communication Analysis
-	fmt.Println("\n=== Business Communication Analysis ===")
-	businessResult, err := textlib.OptimizedBusinessAnalysis(businessEmail)
-	if err != nil {
-		log.Printf("Business analysis error: %v", err)
-	} else {
-		fmt.Printf("Sentiment: %s (score: %.2f)\n", 
-			businessResult.Sentiment.Sentiment, 
-			businessResult.Sentiment.Score)
-		fmt.Printf("People mentioned: %v\n", businessResult.Entities.People)
-		fmt.Printf("Action items: %v\n", businessResult.Keywords.Keywords)
-	}
+	// Example 5: Validated Entity Extraction
+	fmt.Println("\n=== Validated Entity Extraction ===")
+	validatedResult := textlib.ValidatedExtraction(businessEmail)
+	fmt.Printf("Entities found: %d\n", len(validatedResult.Entities))
+	fmt.Printf("Validation level: %s\n", validatedResult.ValidationLevel)
+	fmt.Printf("Confidence: %.2f\n", validatedResult.Confidence)
+	fmt.Printf("Processing path: %v\n", validatedResult.ProcessingPath)
 
-	// Example 4: Social Media Analysis
-	fmt.Println("\n=== Social Media Analysis ===")
-	socialResult, err := textlib.OptimizedSocialAnalysis(socialPost)
-	if err != nil {
-		log.Printf("Social analysis error: %v", err)
-	} else {
-		fmt.Printf("Sentiment: %s (confidence: %.2f)\n", 
-			socialResult.Sentiment.Sentiment,
-			socialResult.Sentiment.Confidence)
-		fmt.Printf("Trending topics: %v\n", socialResult.TrendingTopics)
-		fmt.Printf("Formatted: %s\n", socialResult.FormattedText.Text)
-	}
-
-	// Example 5: Quick Insights (minimal processing)
-	fmt.Println("\n=== Quick Insights ===")
-	quickResult, err := textlib.OptimizedQuickInsights(technicalDoc)
-	if err != nil {
-		log.Printf("Quick insights error: %v", err)
-	} else {
-		fmt.Printf("Top entities: %v\n", quickResult.TopEntities)
-		fmt.Printf("Top keywords: %v\n", quickResult.TopKeywords)
-		fmt.Printf("Quality score: %.2f\n", quickResult.ValidationScore)
-		fmt.Printf("Processing steps: %d (optimized for speed)\n", quickResult.ProcessingSteps)
-	}
-
-	// Example 6: Enhanced Extraction (double-pass pattern)
-	fmt.Println("\n=== Enhanced Extraction Pattern ===")
-	enhancedResult, err := textlib.OptimizedEnhancedExtraction(technicalDoc)
-	if err != nil {
-		log.Printf("Enhanced extraction error: %v", err)
-	} else {
-		fmt.Printf("Initial entities: %d\n", len(enhancedResult.InitialEntities))
-		fmt.Printf("Enhanced entities: %d\n", len(enhancedResult.EnhancedEntities))
-		fmt.Printf("Improvement: %.1f%%\n", enhancedResult.Improvement)
-		fmt.Printf("New entities found: %v\n", getNewEntities(
-			enhancedResult.InitialEntities, 
-			enhancedResult.EnhancedEntities))
-	}
-
-	// Example 7: Custom Sequence (when you need specific order)
-	fmt.Println("\n=== Custom Sequence Example ===")
-	customAnalysis(technicalDoc)
-
-	// Example 8: Budget-Conscious Processing
-	fmt.Println("\n=== Budget-Conscious Processing ===")
-	budgetAnalysis(businessEmail, 10) // Max 10 cost units
+	// Example 6: Performance Comparison
+	fmt.Println("\n=== Performance Comparison ===")
+	performanceComparison(technicalDoc)
 }
 
-// Custom sequence when you need specific processing order
-func customAnalysis(text string) {
-	// Following discovered optimal pattern: validate → entities → readability → keywords
+// Performance comparison demonstration
+func performanceComparison(text string) {
+	// Compare different analysis approaches
 	
-	// Always validate first (cost: 1)
-	validation := textlib.ValidateOutput(text)
-	if !validation.IsValid {
-		log.Printf("Invalid input: %v", validation.Issues)
-		return
-	}
+	// Quick insights (fastest)
+	fmt.Println("Quick insights (optimized for speed):")
+	quickResult := textlib.QuickInsights(text)
+	fmt.Printf("  Processing time: %v\n", quickResult.Performance.TotalTime)
+	fmt.Printf("  Insights count: %d\n", len(quickResult.Insights))
 	
-	// Extract entities (cost: 5)
-	entities, _ := textlib.ExtractEntities(text)
+	// Smart analysis (balanced)
+	fmt.Println("Smart analysis (balanced quality/speed):")
+	smartResult := textlib.SmartAnalyze(text)
+	fmt.Printf("  Processing time: %v\n", smartResult.ProcessingTime)
+	fmt.Printf("  Quality score: %.2f\n", smartResult.QualityScore)
 	
-	// Analyze readability (cost: 3)
-	readability, _ := textlib.AnalyzeReadability(text)
-	
-	// Extract keywords with context (cost: 4)
-	keywords, _ := textlib.ExtractKeywords(text,
-		textlib.WithContext(entities))
-	
-	fmt.Printf("Custom sequence completed - Total cost: 13\n")
-	fmt.Printf("Found %d entities, readability: %.2f, %d keywords\n",
-		len(entities.Entities), readability.Score, len(keywords.Keywords))
-}
-
-// Budget-conscious processing when you have cost constraints
-func budgetAnalysis(text string, maxCost int) {
-	costUsed := 0
-	
-	// Tier 1: Essential validation (cost: 1)
-	validation := textlib.ValidateOutput(text)
-	costUsed += 1
-	if !validation.IsValid {
-		return
-	}
-	
-	// Tier 2: Low-cost analysis (cost: 2)
-	if costUsed+2 <= maxCost {
-		code, _ := textlib.DetectCode(text)
-		costUsed += 2
-		fmt.Printf("Has code: %v\n", code.HasCode)
-	}
-	
-	// Tier 3: Medium-cost analysis (cost: 3-4)
-	if costUsed+3 <= maxCost {
-		readability, _ := textlib.AnalyzeReadability(text)
-		costUsed += 3
-		fmt.Printf("Readability: %.2f\n", readability.Score)
-	}
-	
-	// Tier 4: Higher-cost analysis (cost: 4-5)
-	if costUsed+4 <= maxCost {
-		keywords, _ := textlib.ExtractKeywords(text, textlib.WithLimit(3))
-		costUsed += 4
-		fmt.Printf("Top keywords: %v\n", keywords.Keywords)
-	}
-	
-	fmt.Printf("Budget analysis completed - Cost: %d/%d\n", costUsed, maxCost)
-}
-
-// Helper function to find new entities
-func getNewEntities(initial, enhanced []Entity) []string {
-	initialMap := make(map[string]bool)
-	for _, e := range initial {
-		initialMap[e.Text] = true
-	}
-	
-	var newEntities []string
-	for _, e := range enhanced {
-		if !initialMap[e.Text] {
-			newEntities = append(newEntities, e.Text)
-		}
-	}
-	
-	return newEntities
+	// Deep technical (most comprehensive)
+	fmt.Println("Deep technical analysis (highest quality):")
+	deepResult := textlib.DeepTechnicalAnalysis(text)
+	fmt.Printf("  Processing time: %v\n", deepResult.Performance.TotalTime)
+	fmt.Printf("  Overall quality: %.2f\n", deepResult.Quality.OverallScore)
 }
 
 func min(a, b int) int {

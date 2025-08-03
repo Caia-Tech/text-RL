@@ -2,7 +2,6 @@ module textlib-rl-system
 
 go 1.21
 
-require (
-	// No external dependencies required for the core system
-	// All functionality is implemented using Go standard library
-)
+require github.com/caiatech/textlib v0.0.0-00010101000000-000000000000
+
+replace github.com/caiatech/textlib => github.com/Caia-Tech/text-API v1.1.0
